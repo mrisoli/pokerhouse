@@ -41,6 +41,29 @@ bun run dev
 Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
 Your app will connect to the Convex cloud backend automatically.
 
+## Deployment (Vercel)
+
+The web app deploys to Vercel via [Nitro](https://nitro.build/), which detects
+Vercel at build time and emits the Build Output API format. Deployment uses
+Vercel's Git integration — every push to `main` triggers a build.
+
+**One-time setup** (in the Vercel dashboard):
+
+1. **Import** the GitHub repo (`mrisoli/pokerhouse`) into Vercel.
+2. Set **Root Directory** to `apps/web`. Keep "Include files outside the Root
+   Directory" enabled so the workspace (`bun.lock`, `packages/*`) is available.
+   Framework, install (`bun install`) and build (`bun run build`) are pinned in
+   `apps/web/vercel.json`.
+3. Add the **Environment Variables** the client build needs (Production +
+   Preview), reusing the values from `apps/web/.env`:
+   - `VITE_CONVEX_URL`
+   - `VITE_CONVEX_SITE_URL`
+4. Deploy. Subsequent pushes to `main` deploy automatically.
+
+> The Convex backend is deployed separately (`bun run dev:setup` / `convex
+> deploy`); Vercel only hosts the frontend, which talks to Convex over the URLs
+> above.
+
 ## UI Customization
 
 React web apps in this stack share shadcn/ui primitives through `packages/ui`.
