@@ -3,10 +3,10 @@ import type { ConvexQueryClient } from "@convex-dev/react-query";
 import { Toaster } from "@pokerhouse/ui/components/sonner";
 import type { QueryClient } from "@tanstack/react-query";
 import {
+  createRootRouteWithContext,
   HeadContent,
   Outlet,
   Scripts,
-  createRootRouteWithContext,
   useRouteContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
@@ -19,13 +19,13 @@ import Header from "../components/header";
 
 import appCss from "../index.css?url";
 
-const getAuth = createServerFn({ method: "GET" }).handler(async () => {
-  return await getToken();
-});
+const getAuth = createServerFn({ method: "GET" }).handler(
+  async () => await getToken()
+);
 
 export interface RouterAppContext {
-  queryClient: QueryClient;
   convexQueryClient: ConvexQueryClient;
+  queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
@@ -67,11 +67,11 @@ function RootDocument() {
   const context = useRouteContext({ from: Route.id });
   return (
     <ConvexBetterAuthProvider
-      client={context.convexQueryClient.convexClient}
       authClient={authClient}
+      client={context.convexQueryClient.convexClient}
       initialToken={context.token}
     >
-      <html lang="en" className="dark">
+      <html className="dark" lang="en">
         <head>
           <HeadContent />
         </head>

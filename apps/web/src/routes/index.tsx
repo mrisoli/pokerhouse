@@ -26,6 +26,22 @@ const TITLE_TEXT = `
 function HomeComponent() {
   const healthCheck = useQuery(convexQuery(api.healthCheck.get, {}));
 
+  const isConnected = healthCheck.data === "OK";
+
+  let statusColor = "bg-red-500";
+  if (isConnected) {
+    statusColor = "bg-green-500";
+  } else if (healthCheck.isLoading) {
+    statusColor = "bg-orange-400";
+  }
+
+  let statusLabel = "Error";
+  if (healthCheck.isLoading) {
+    statusLabel = "Checking...";
+  } else if (isConnected) {
+    statusLabel = "Connected";
+  }
+
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2">
       <pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
@@ -33,16 +49,8 @@ function HomeComponent() {
         <section className="rounded-lg border p-4">
           <h2 className="mb-2 font-medium">API Status</h2>
           <div className="flex items-center gap-2">
-            <div
-              className={`h-2 w-2 rounded-full ${healthCheck.data === "OK" ? "bg-green-500" : healthCheck.isLoading ? "bg-orange-400" : "bg-red-500"}`}
-            />
-            <span className="text-muted-foreground text-sm">
-              {healthCheck.isLoading
-                ? "Checking..."
-                : healthCheck.data === "OK"
-                  ? "Connected"
-                  : "Error"}
-            </span>
+            <div className={`h-2 w-2 rounded-full ${statusColor}`} />
+            <span className="text-muted-foreground text-sm">{statusLabel}</span>
           </div>
         </section>
       </div>

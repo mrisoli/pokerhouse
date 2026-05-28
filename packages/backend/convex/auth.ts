@@ -7,7 +7,15 @@ import type { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import authConfig from "./auth.config";
 
-const siteUrl = process.env.SITE_URL!;
+function getSiteUrl(): string {
+  const url = process.env.SITE_URL;
+  if (!url) {
+    throw new Error("SITE_URL environment variable is not set");
+  }
+  return url;
+}
+
+const siteUrl = getSiteUrl();
 
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
@@ -33,7 +41,5 @@ export { createAuth };
 
 export const getCurrentUser = query({
   args: {},
-  handler: async (ctx) => {
-    return await authComponent.safeGetAuthUser(ctx);
-  },
+  handler: async (ctx) => await authComponent.safeGetAuthUser(ctx),
 });

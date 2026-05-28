@@ -1,6 +1,7 @@
 {
   "extends": "@pokerhouse/config/tsconfig.base.json",
   "compilerOptions": {
+    "types": [],
     "strictNullChecks": true
   }
 }

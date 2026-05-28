@@ -1,4 +1,20 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core", "ultracite/biome/react"],
+  "overrides": [
+    {
+      // TanStack Router file-based routes use framework-mandated names ($, __root, etc.)
+      "includes": ["apps/web/src/routes/**"],
+      "linter": {
+        "rules": { "style": { "useFilenamingConvention": "off" } }
+      }
+    },
+    {
+      // Convex module names map to the generated `api.<file>` accessors (e.g. api.healthCheck)
+      "includes": ["packages/backend/convex/**"],
+      "linter": {
+        "rules": { "style": { "useFilenamingConvention": "off" } }
+      }
+    }
+  ]
 }
