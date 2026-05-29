@@ -11,6 +11,8 @@
 import type * as auth from "../auth.js";
 import type * as healthCheck from "../healthCheck.js";
 import type * as http from "../http.js";
+import type * as pokerHandValidators from "../pokerHandValidators.js";
+import type * as pokerHands from "../pokerHands.js";
 import type * as privateData from "../privateData.js";
 
 import type {
@@ -23,6 +25,8 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   healthCheck: typeof healthCheck;
   http: typeof http;
+  pokerHandValidators: typeof pokerHandValidators;
+  pokerHands: typeof pokerHands;
   privateData: typeof privateData;
 }>;
 
