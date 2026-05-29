@@ -24,6 +24,7 @@
         "@convex-dev/react-query": "^0.1.0",
         "@pokerhouse/backend": "workspace:*",
         "@pokerhouse/env": "workspace:*",
+        "@pokerhouse/poker": "workspace:*",
         "@pokerhouse/ui": "workspace:*",
         "@tailwindcss/vite": "^4.2.2",
         "@tanstack/react-form": "^1.28.0",
@@ -90,6 +91,15 @@
       },
       "devDependencies": {
         "@pokerhouse/config": "workspace:*",
+        "typescript": "catalog:",
+      },
+    },
+    "packages/poker": {
+      "name": "@pokerhouse/poker",
+      "version": "0.0.0",
+      "devDependencies": {
+        "@pokerhouse/config": "workspace:*",
+        "@types/bun": "^1.3.14",
         "typescript": "catalog:",
       },
     },
@@ -401,6 +411,8 @@
     "@pokerhouse/config": ["@pokerhouse/config@workspace:packages/config"],
 
     "@pokerhouse/env": ["@pokerhouse/env@workspace:packages/env"],
+
+    "@pokerhouse/poker": ["@pokerhouse/poker@workspace:packages/poker"],
 
     "@pokerhouse/ui": ["@pokerhouse/ui@workspace:packages/ui"],
 
